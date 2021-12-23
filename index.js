@@ -19,10 +19,12 @@ MongoStore.prototype.set = function (key, value, lifetime, callback) {
 
   this._collection.update({
     _id: _id
-  }, {
-    _id: _id,
-    data: value,
-    expires: expiration
+  }, { 
+    $set: {
+      _id: _id,
+      data: value,
+      expires: expiration
+    }
   }, {
     upsert: true
   }, function () {
